@@ -1,6 +1,8 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import ErrorPage from "./ErrorPage";
 import Toolbar from "../../components/finalworkcomps/Toolbar";
+import Spinner from "../../components/finalworkcomps/Spinner";
+
 import {useDispatch, useSelector} from "react-redux";
 import {setUser} from "../../features/user";
 
@@ -12,7 +14,16 @@ const ProfilePage = () => {
     const user = useSelector(state => state.user.user)
     const dispatch = useDispatch()
     const [visibleForm, setVisibleForm] = useState(false)
+    const [imgError, setImgError] = useState("")
     const [errorMsg, setErrorMsg] = useState("")
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, []);
 
     async function openForm(){
         setVisibleForm(true)
@@ -20,13 +31,14 @@ const ProfilePage = () => {
 
     async function closeForm(){
         setVisibleForm(false)
+        setImgError("")
         setErrorMsg("")
     }
 
     async function updatePic(){
         const image = imageRef.current.value
 
-        if (image.length === 0) return setErrorMsg("Don't leave empty fields!")
+        if (image.length === 0) return setImgError("Don't leave empty fields!")
 
         const userItem = {
             username: user.username,
@@ -47,7 +59,7 @@ const ProfilePage = () => {
         const data = await res.json()
 
         if(data.error) return console.log(data.message)
-        setErrorMsg(`Profile image was updated successfully!`)
+        setImgError("")
 
         dispatch(setUser(data.data))
     }
@@ -94,36 +106,47 @@ const ProfilePage = () => {
     return (
         <div>
             <Toolbar user={user}/>
-            <div className="d-flex flex-wrap m-10 gap-20 profile-settings">
-
-                <div className="user-profile p-10">
-                    <img src={user.image} alt=""/>
-                    <p><b>Username</b>: {user.username}</p>
+            {isLoading? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
+                    <Spinner />
                 </div>
 
-                <div className="update-profile">
-                    {visibleForm && <div className="form">
+            ) : (
+                <>
 
-                        <div className="d-flex flex-end">
-                            <button className="close-button" onClick={closeForm}>x</button>
-                        </div>
-                        <div className="m-10">
-                            <input type="text" placeholder="image url" ref={imageRef}/><label> Enter new image url</label><br/>
-                            <button onClick={updatePic}>Save image</button>
-                        </div>
-                        <div className="m-10">
-                            <input type="text" placeholder="new password" ref={pass1Ref}/><label> Enter new password</label><br/>
-                            <button onClick={changePassword}>Save password</button>
-                            <p style={{color: "red"}}> {errorMsg}</p>
+                    <div className="d-flex flex-wrap m-10 gap-20 profile-settings">
+
+                        <div className="user-profile p-10">
+                            <img src={user.image} alt=""/>
+                            <p><b>Username</b>: {user.username}</p>
                         </div>
 
-                    </div>}
-                    <button className="update-profile-button" onClick={openForm}>Update profile</button>
+                        <div className="update-profile">
+                            {visibleForm && <div className="form">
+
+                                <div className="d-flex flex-end">
+                                    <button onClick={closeForm}>Close</button>
+                                </div>
+                                <div className="m-10 update">
+                                    <input type="text" placeholder="Insert new image url" ref={imageRef}/><label>{imgError}</label><br/>
+                                    <button onClick={updatePic}>Save image</button>
+                                </div>
+                                <div className="m-10 update">
+                                    <input type="text" placeholder="Enter new password" ref={pass1Ref}/><label>{errorMsg}</label><br/>
+                                    <button onClick={changePassword}>Save password</button>
+                                </div>
+
+                            </div>}
+                            <button className="update-profile-button" onClick={openForm}>Update profile</button>
 
 
-                </div>
+                        </div>
 
-            </div>
+                    </div>
+                </>
+            )}
+
+
 
         </div>
     );

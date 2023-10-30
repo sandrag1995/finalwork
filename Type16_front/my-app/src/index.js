@@ -5,28 +5,38 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {configureStore} from "@reduxjs/toolkit"
 import {Provider} from "react-redux"
-
-// import userReducer from "./features/nodetask10feat"
-import colorReducer from "./features/colorcont"
-import favUserReducer from "./features/favuserlist"
-import playerReducer from "./features/monopoly"
-import petReducer from "./features/tamagothiapp"
+import { combineReducers} from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
+import { persistReducer, persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import userReducer from "./features/user"
 
+const reducers = combineReducers({
+    user: userReducer,
+});
+
+const persistConfig = {
+    key: "key",
+    root: "root",
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
 const store = configureStore({
-    reducer:{
-        user: userReducer,
-        color: colorReducer,
-        favuser: favUserReducer,
-        player: playerReducer,
-        pet: petReducer
-    }
+    reducer: persistedReducer,
+    middleware: [thunk],
 })
+let persistor = persistStore(store);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
             <App/>
+            </PersistGate>
         </Provider>
     </React.StrictMode>
 );

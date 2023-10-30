@@ -1,14 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import Toolbar from "../../components/finalworkcomps/Toolbar";
 import SingleUser from "../../components/finalworkcomps/SingleUser/SingleUser";
 import ErrorPage from "./ErrorPage";
+import Spinner from "../../components/finalworkcomps/Spinner";
 
+const AllUsers = ({user, users, setUsers, setSelectedUser}) => {
 
-const AllUsers = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
+    const [isLoading, setIsLoading] = useState(true)
 
+    const fetchAllUsers = async () =>{
+        setIsLoading(true)
 
-    useEffect(() => {
         const options = {
             method: "GET",
             headers: {
@@ -25,15 +28,23 @@ const AllUsers = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
                         const filteredUsers = data.data.filter((u) => u._id !== user.id);
                         setUsers(filteredUsers);
                     }
-
                 }
+                setIsLoading(false)
             });
+
+
+    }
+
+    useEffect(() => {
+
+
+        fetchAllUsers()
+// eslint-disable-next-line
     }, [user]);
 
     function selectUser(user) {
             setSelectedUser(user);
     }
-
 
     if (!user){
         return (
@@ -41,15 +52,19 @@ const AllUsers = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
         );
     }
 
-
     return (
         <div>
             <Toolbar user={user}/>
-            <div className="all-users d-flex flex-wrap">
+
+            {!isLoading ?  <div className="all-users d-flex flex-wrap">
                 {users.map((user, i) => (
                     <SingleUser key={i} user={user} onSelectUser={() => selectUser(user)}/>
                 ))}
-            </div>
+            </div> : <div style={{ display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+                <h1 style={{color: "white"}}>Users are still loading...</h1>
+                    <Spinner/>
+            </div>}
+
         </div>
     );
 };

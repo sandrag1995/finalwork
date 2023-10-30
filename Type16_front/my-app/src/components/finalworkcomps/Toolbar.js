@@ -31,7 +31,8 @@ const Toolbar = () => {
     function logout(){
         setUser(null)
         localStorage.removeItem("token");
-        localStorage.removeItem("autologin")
+        localStorage.removeItem("autologin");
+
         navigate("/reg-log");
     }
 
@@ -56,7 +57,7 @@ const Toolbar = () => {
                     <img src={user.image} alt=""/>
                     <p>Hello, {user.username}</p>
                 </div>
-            <div className="d-flex gap-10">
+            <div className="toolbar-buttons d-flex gap-10">
                 <button onClick={toUserProfile} className={location.pathname === `/${user.username}/profile` ? "active-button" : ""}>{user.username}'s Profile Page</button>
                 <button onClick={toMessages} className={location.pathname === '/messages' ? "active-button" : ""}>Direct Messages</button>
                 <button onClick={toPostsPage} className={location.pathname === '/posts' ? "active-button" : ""}>To Posts Page</button>

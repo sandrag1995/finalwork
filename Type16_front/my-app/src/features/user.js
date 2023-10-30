@@ -46,9 +46,7 @@ export const { setUser,
     addPost,
     setPosts,
     removePost,
-    addComment,
     setMessages,
-    addMessage
    } = userSlice.actions
 
 export default userSlice.reducer;

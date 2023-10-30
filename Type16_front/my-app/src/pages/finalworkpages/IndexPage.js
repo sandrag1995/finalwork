@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Spinner from "../../components/finalworkcomps/Spinner";
 const IndexPage = () => {
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, []);
+
     const navigate = useNavigate();
     const [hoveredText, setHoveredText] = useState('');
     const imageMap = {
@@ -25,14 +35,21 @@ const IndexPage = () => {
 
     return (
         <div className="index-page d-flex flex-column justify-center align-items-center" style={{ height: '100vh' }}>
-            <img src={imageMap[hoveredText]} alt="" className="logo"/>
-            <h1>My Final
-                <span onMouseEnter={() => handleSpanMouseEnter('M')} onMouseLeave={handleSpanMouseLeave}> M</span>
-                <span onMouseEnter={() => handleSpanMouseEnter('E')} onMouseLeave={handleSpanMouseLeave}>E</span>
-                <span onMouseEnter={() => handleSpanMouseEnter('R')} onMouseLeave={handleSpanMouseLeave}>R</span>
-                <span onMouseEnter={() => handleSpanMouseEnter('N')} onMouseLeave={handleSpanMouseLeave}>N </span>
-                 Project Page</h1><br />
-            <button onClick={toRegLog}>Enter the Page</button>
+            {isLoading? (
+                <Spinner/>
+            ) : (
+                <>
+                    <img src={imageMap[hoveredText]} alt="" className="logo"/>
+                    <h1>My Final
+                        <span onMouseEnter={() => handleSpanMouseEnter('M')} onMouseLeave={handleSpanMouseLeave}> M</span>
+                        <span onMouseEnter={() => handleSpanMouseEnter('E')} onMouseLeave={handleSpanMouseLeave}>E</span>
+                        <span onMouseEnter={() => handleSpanMouseEnter('R')} onMouseLeave={handleSpanMouseLeave}>R</span>
+                        <span onMouseEnter={() => handleSpanMouseEnter('N')} onMouseLeave={handleSpanMouseLeave}>N </span>
+                        Project Page</h1><br />
+                    <button onClick={toRegLog}>Enter the Page</button>
+                </>
+            )}
+
         </div>
     );
 };

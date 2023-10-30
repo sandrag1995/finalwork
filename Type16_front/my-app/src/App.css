@@ -65,7 +65,8 @@
 
 
 body{
-  background-color: #2c2b2b;
+  background-color: #131313;
+  font-family: Arial, serif;
 }
 
 
@@ -99,33 +100,37 @@ body{
 }
 
 .index-page button{
-  color: whitesmoke;
-  background-color: #285577;
-  border-color: #285577;
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
+  color: #131313;
   padding: 10px;
   border-radius: 10px;
   font-size: 20px;
+  transition-duration: 0.4s;
 }
 
 .index-page button:hover{
   cursor: pointer;
 }
 
+/*/////////////////REGISTRATION/LOGIN SECTION////////////////////*/
+
 .reg-log{
   height: 100vh;
 }
 
 .reg-log span{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .register-form,
 .login-form{
   height: 350px;
-  background-color: #1e1d1d;
+  width: 520px;
+  background-color: #2d2c2c;
   border: 3px solid rgb(96, 94, 94);
   border-radius: 10px;
-  color: #9f9b9b;
+  color: #8c8c8c;
 }
 
 .register-form input,
@@ -133,7 +138,14 @@ body{
   font-size: 20px;
   border-radius: 20px;
   padding: 5px;
-  margin: 5px;
+  margin: 5px 10px;
+  background-color: #282828;
+  border: 1px solid #232323;
+  color: #6c6a6a;
+}
+
+.approved{
+  font-size: 20px;
 }
 
 .register-form button,
@@ -141,7 +153,8 @@ body{
   font-size: 22px;
   border-radius: 5px;
   margin: 10px;
-  padding: 5px;
+  padding: 5px 10px;
+  color: white;
   transition-duration: 0.4s;
 }
 
@@ -151,8 +164,8 @@ background-color: #0e69c4;
 }
 
 .login-form button{
-  background-color: indianred;
-  border-color: indianred;
+  background-color: #833333;
+  border-color: #833333;
 }
 
 .register-form button:hover{
@@ -177,12 +190,17 @@ background-color: #0e69c4;
   color: cadetblue;
 }
 
+/*/////////////TOOLBAR///////////////*/
+
 .toolbar{
-background-color: #1a3d1a;
-  border: 2px solid #286228;
+background-color: #5e675d;
   border-radius: 10px;
-  color: #b9c4cb;
+  color: white;
   font-size: 18px;
+}
+
+.dropdown-menu{
+  display: none;
 }
 
 .toolbar button{
@@ -194,11 +212,11 @@ background-color: #1a3d1a;
 }
 
 .active-button {
-  background-color: #286228;
-  border-color: #286228;
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
   padding: 5px;
   border-radius: 5px;
-  color: white;
+  color: #131313;
 }
 
 .toolbar img{
@@ -216,17 +234,18 @@ background-color: #1a3d1a;
 .logout-button button{
   padding: 8px;
   border-radius: 20px;
-  background-color: darkred;
-  color: white;
+  background-color: transparent;
+  border-color: transparent;
+  color: #a0f9a3;
   transition-duration: 0.4s;
 }
 
-.logout-button button:hover{
-  background-color: #520202;
-}
+
+/*///////////////USER PROFILE SETTINGS////////////////*/
 
 .user-profile{
-  background-color: #5c6167;
+  background-color: #767e76;
+  color: white;
 }
 
 .user-profile img{
@@ -237,11 +256,12 @@ background-color: #1a3d1a;
 }
 
 .update-profile-button{
-  background-color: rgb(22, 82, 24);
+  background-color: #a0f9a3;
   border-radius: 20px;
   padding: 5px;
-  border-color: rgb(22, 82, 24);
+  border-color: #a0f9a3;
   font-size: 19px;
+  color: #131313;
   position: relative;
 }
 
@@ -253,35 +273,47 @@ background-color: #1a3d1a;
 .form input{
   font-size: 18px;
   border-radius: 5px;
+  background-color: #282828;
+  border: 1px solid #181818;
+  color: #6c6a6a;
 }
 
 .form{
   height: 190px;
+  width: 400px;
   border-radius: 20px;
   background-color: #423f3f;
   position: absolute;
+  color: #e7c45e;
   z-index: 2;
 }
 
+.form label{
+  margin-left: 20px;
+  font-size: 12px;
+}
+
 .form button{
-background-color: rgb(61, 96, 61);
-  border-color: rgb(61, 96, 61);
+background-color: #a0f9a3;
+  border-color: #a0f9a3;
   border-radius: 5px;
+  color: #131313;
 }
 
 .form button:hover{
-  background-color: rgb(40, 63, 40);
-  border-color: rgb(40, 63, 40);
-  color: #ababab;
   cursor: pointer;
 }
 
-.form button:nth-child(1){
-  background-color: rgba(0, 0, 0, 0.56);
-  border-color: rgba(0, 0, 0, 0.56);
-  border-radius: 100%;
-  color: white;
+.update button{
+  margin-top: 10px;
 }
+
+.form button:nth-child(1){
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+/*//////////////////Posting section//////////////////////*/
 
 .filter-bar{
   position: relative;
@@ -289,18 +321,17 @@ background-color: rgb(61, 96, 61);
 
 .create-button{
   padding: 6px;
-  background-color: rgba(7, 91, 91, 0.6);
-  border-radius: 20px;
-}
-
-.create-button:hover{
-  color: white;
+  color: #a0f9a3;
+  background-color: transparent;
+  border-color: transparent;
+  transition-duration: 0.4s;
 }
 
 .make-post-form{
   height: 180px;
   border-radius: 20px;
   background-color: #423f3f;
+  color: #e7c45e;
   position: absolute;
   top: 90px;
   right: 150px;
@@ -308,6 +339,9 @@ background-color: rgb(61, 96, 61);
 }
 
 .make-post-form input{
+  background-color: #282828;
+  border: 1px solid #181818;
+  color: #7e7d7d;
   border-radius: 5px;
   margin: 3px;
   font-size: 18px;
@@ -316,15 +350,12 @@ background-color: rgb(61, 96, 61);
 .make-button{
   font-size: 16px;
   margin-top: 5px;
-  background-color: rgb(61, 96, 61);
-  border-color: rgb(61, 96, 61);
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
   border-radius: 5px;
 }
 
 .make-button:hover{
-  background-color: rgb(40, 63, 40);
-  border-color: rgb(40, 63, 40);
-  color: #ababab;
   cursor: pointer;
 }
 
@@ -333,12 +364,12 @@ background-color: rgb(61, 96, 61);
 }
 
 .close-button{
-  text-align: center;
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-bottom: 3px;
-  background-color: rgba(0, 0, 0, 0.56);
-  border-radius: 100px;
+ margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
+  border-radius: 5px;
 }
 
 .close-button:hover{
@@ -386,8 +417,9 @@ background-color: rgb(61, 96, 61);
 }
 
 .single-post{
-  background-color: whitesmoke;
+  background-color: #2f3a2f;
   border: 2px solid #3f3c3c;
+  color: white;
   border-radius: 5px;
   -webkit-box-shadow: 2px 6px 16px -10px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 6px 16px -10px rgba(0,0,0,0.75);
@@ -409,11 +441,14 @@ background-color: rgb(61, 96, 61);
   overflow: scroll;
 }
 
+/*/////////////////ALL USERS SECTION///////////////*/
+
 .single-user-card{
+  width: 380px;
   height: 80px;
-  color: #b5b5bb;
+  color: #e6e6ea;
   background-color: #435743;
-  border: 3px solid rgb(128, 128, 128);
+  border: 3px solid #435743;
   border-radius: 5px;
   -webkit-box-shadow: 2px 6px 16px -10px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 6px 16px -10px rgba(0,0,0,0.75);
@@ -429,48 +464,98 @@ background-color: rgb(61, 96, 61);
 }
 
 .single-user-card button{
-  background-color: #2d652d;
-  border-color: #2d652d;
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
   border-radius: 5px;
-  color: #aab3b6;
+  color: #131313;
 }
 
 .single-user-card button:hover{
   cursor: pointer;
 }
 
+/*//////////////////////MODAL SECTION///////////////////////*/
+
 .modal{
-  background-color: #262525;
+  background-color: #131313;
   position: absolute;
   top: 0;
   height: 100vh;
   width: 100vw;
   color: #ded0d0;
   z-index: 3;
+
 }
 
-.modal input{
-  font-size: 19px;
+.sections{
+ justify-content: center;
+  margin: 30px;
+}
+
+.modal textarea{
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #282828;
+  color: #7e7c7c;
   margin-right: 10px;
+  padding: 10px;
 }
 
 .modal button{
-  font-size: 19px;
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 20px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-.comments{
+.modal-content button{
+  background-color: #131313;
+  border-color: #131313;
+  color: #a0f9a3;
+}
+
+.post-info{
+  background-color: #131313;
+}
+
+.comment-btn{
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
+  color: #131313;
+  width: 150px;
   margin-top: 10px;
-  height: 350px;
+  transition-duration: 0.4s;
+}
+
+.comment-btn:hover{
+cursor: pointer;
+}
+
+.comments{
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   overflow: scroll;
-  background-color: #262525;
+  height: 700px;
+  background-color: #131313;
 }
 
 .comment{
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment span{
+  display: block;
+}
+
+.comment-text{
+  word-wrap: break-word;
 }
 
 .modal-content img{
@@ -479,8 +564,9 @@ background-color: rgb(61, 96, 61);
 }
 
 .user-card{
+  width: 300px;
   height: 140px;
-  background-color: #424648;
+  background-color: #282828;
   padding-left: 10px;
   padding-right: 10px;
   border: 3px solid rgb(128, 128, 128);
@@ -494,10 +580,15 @@ background-color: rgb(61, 96, 61);
   border-radius: 100%;
 }
 
+.user-card button{
+  background-color: #a0f9a3;
+  border-color: #a0f9a3;
+  color: #131313;
+}
+
 .comment-section{
-  border: 2px solid rgb(128, 128, 128);
   border-radius: 5px;
-  background-color: #262525;
+  background-color: #131313;
 }
 
 .comment{
@@ -505,12 +596,14 @@ background-color: rgb(61, 96, 61);
   border-radius: 5px;
   margin-bottom: 10px;
   padding-left: 10px;
-  background-color: #3f3c3c;
+  background-color: #282828;
   color: #adadad;
 }
 
+/*//////////////Messages section///////////////*/
+
 .messaging{
-  background-color: rgb(24, 24, 24)
+  background-color: #131313;
 }
 
 .message-field{
@@ -519,7 +612,7 @@ background-color: rgb(61, 96, 61);
 }
 
 .message-field h2{
-  color: #7f888f;
+  color: white;
   text-align: center;
 }
 
@@ -536,38 +629,44 @@ background-color: rgb(61, 96, 61);
 }
 
 .available-users{
-  background-color: rgb(24, 24, 24);
+  background-color: #131313;
   height: 80vh;
   overflow: scroll;
 }
 
-.message-inputs input{
+.message-inputs textarea{
   margin-left: 20px;
+  margin-top: 5px;
   font-size: 20px;
-  width: 58%;
+  width: 55%;
+  height: 25px;
   padding: 10px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  background-color: #282828;
+  color: #969393;
+  border-color: transparent;
 }
 
 .message-inputs button{
   color: #e3e0e0;
-  background-color: #3689b0;
+  background-color: #435743;
   font-size: 20px;
+  height: 52px;
   padding: 5px;
+  margin-top: 5px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
 
 .message-inputs button:hover{
-  background-color: #204b60;
   cursor: pointer;
 }
 
-
 .single-person{
   height: 90px;
-  background-color: #204b60;
+  background-color: #282828;
+  color: white;
   padding-left: 10px;
   padding-right: 10px;
   border: 3px solid rgb(128, 128, 128);
@@ -586,13 +685,14 @@ background-color: rgb(61, 96, 61);
 }
 
 .single-message{
-  min-width: 100px;
+  min-width: 120px;
   max-width: 280px;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
-  background-color: lightskyblue;
   border-radius: 50px;
   margin-bottom: 10px;
+  color: #d5dade;
+  position: relative;
 }
 
 .user-message {
@@ -601,10 +701,16 @@ background-color: rgb(61, 96, 61);
 }
 
 .selected-user-message {
-  background-color: rgba(6, 89, 178, 0.6);
+  background-color: #435743;
   margin-right: auto;
 }
 
+.message-timestamp{
+  color: #a0f9a3;
+  font-size: 11px;
+  position: absolute;
+  top: 40px;
+}
 
 /*//////Responsive web design goes here//////*/
 
@@ -658,7 +764,7 @@ background-color: rgb(61, 96, 61);
 }
 
 @media (max-width: 920px) {
-  .tool-bar-buttons {
+  .toolbar-buttons {
     display: none;
   }
   .ham-button{
@@ -668,14 +774,15 @@ background-color: rgb(61, 96, 61);
   }
 
   .dropdown-menu {
+    display: block;
     padding: 10px;
     width: 220px;
     border-radius: 20px;
     position: absolute;
-    background-color: #575555;
+    background-color: #465045;
     z-index: 3;
     top: 25px;
-    right: 80px;
+    right: 180px;
   }
 
   .dropdown-menu button{
@@ -710,6 +817,18 @@ background-color: rgb(61, 96, 61);
     right: 15px;
   }
 
+  .modal-content img{
+    height: 250px;
+  }
+
+  .user-card img{
+    height: 50px;
+  }
+
+  .comments{
+    height: 370px;
+  }
+
   .available-users{
     flex: 1;
   }
@@ -727,6 +846,30 @@ background-color: rgb(61, 96, 61);
   .profile-settings{
     display: flex;
     flex-direction: column;
+  }
+
+  .dropdown-menu{
+    right: 90px;
+  }
+
+  .modal-content img{
+    height: 250px;
+  }
+
+  .comment-inputs{
+    width: 550px;
+  }
+
+  .comments{
+    width: 550px;
+  }
+
+  .user-card{
+    width: 280px;
+  }
+
+  .user-card img{
+    height: 50px;
   }
 
   .message-field h2{
@@ -754,4 +897,127 @@ background-color: rgb(61, 96, 61);
     flex-shrink: 1;
   }
 
+  .filter-bar button{
+    font-size: 14px;
+  }
+
+
+  .modal-content img{
+    height: 200px;
+  }
+
+  .user-card img{
+    height: 50px;
+  }
+
+  .modal textarea{
+    width: 350px;
+    margin-left: 60px;
+  }
+
+  .modal button{
+    font-size: 12px;
+  }
+
+.comments,
+.section-2 p{
+  margin-left: 60px;
+}
+
+  .comment{
+    width: 345px;
+  }
+
+}
+
+
+/*//////////////Portfolio page///////////////*/
+
+.profile-info{
+  margin-top: 20px;
+  margin-left: 20px;
+  color: #e5e5e5;
+}
+
+.profile-info span{
+  font-weight: 600;
+}
+
+.profile-info img{
+  height: 300px;
+}
+
+.projects{
+  margin-top: 20px;
+  margin-left: 20px;
+  color: #e5e5e5;
+  margin-right: 20px;
+}
+
+.projects label{
+  font-size: 20px;
+}
+
+.contact-form{
+  background-color: #154128;
+  padding: 20px 30px;
+  border-radius: 20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+  margin-top: 10px;
+  padding: 5px;
+  width: 400px;
+  background-color: #07160f;
+  color: #969d98;
+  border-color: #0f3123;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.contact-form button{
+  margin-left: 10px;
+  background-color: #f3db61;
+  border-color: #f3db61;
+  border-radius: 8px;
+  color: #514520;
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.all-projects{
+  margin-top: 20px;
+  background-color: #154128;
+  padding: 20px 30px;
+  height: 65vh;
+  overflow: scroll;
+  border-radius: 20px;
+}
+
+.all-projects a{
+  color: #969d98;
+}
+
+.all-projects a:hover{
+  color: #d2d9d8;
+}
+
+.single-project{
+  max-width: 600px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #0f3123;
+  color: #969d98;
+  border-radius: 10px;
+}
+
+.icons{
+  margin: 5px;
+}
+
+.icon{
+  margin: 5px;
+  height: 50px;
 }

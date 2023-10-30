@@ -1,11 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
+
 import Toolbar from "../../components/finalworkcomps/Toolbar";
 import SinglePerson from "../../components/finalworkcomps/messages/SinglePerson";
 import ErrorPage from "./ErrorPage";
+import SmallSpinner from "../../components/finalworkcomps/SmallSpinner";
+
 import {useDispatch, useSelector} from "react-redux";
 import {setMessages} from "../../features/user";
 const MessagesNotSelected = ({user, users, setUsers, setSelectedUser}) => {
+
+    const [isLoading, setIsLoading] = useState(true)
 
     const navigate = useNavigate()
     const messages = useSelector(state => state.user.messages)
@@ -32,7 +37,7 @@ const MessagesNotSelected = ({user, users, setUsers, setSelectedUser}) => {
                         const filteredUsers = data.data.filter((u) => u._id !== user.id && hasMessageHistory(u.username));
                         setUsers(filteredUsers);
                     }
-
+                    setIsLoading(false);
                 }
             });
 
@@ -57,6 +62,7 @@ const MessagesNotSelected = ({user, users, setUsers, setSelectedUser}) => {
             .then(res => res.json())
             .then(data => {
                 dispatch(setMessages(data.data));
+                setIsLoading(false);
             });
     }, [messages])
 
@@ -86,12 +92,15 @@ const MessagesNotSelected = ({user, users, setUsers, setSelectedUser}) => {
 
     return (
         <div>
-            <Toolbar/>
+            <Toolbar />
             <div className="messaging d-flex">
                 <div>
-                 <h2 style={{color: "white", textAlign: "center"}}>Contacts</h2>
+                    <h2 style={{ color: "white", textAlign: "center" }}>Contacts</h2>
                     <div className="available-users flex-1">
-                        {users.map((user) => (<SinglePerson key={user._id} user={user} onSelectUser={() => selectUser(user)}/>))}
+                        {isLoading ? (<SmallSpinner/>
+                        ) : (
+                            users.map((user) => (<SinglePerson key={user._id} user={user} onSelectUser={() => selectUser(user)} />))
+                        )}
                     </div>
                 </div>
 
@@ -99,12 +108,10 @@ const MessagesNotSelected = ({user, users, setUsers, setSelectedUser}) => {
                     <h2>Please select any person from your contacts to message them</h2>
                     <div className="d-flex justify-center">
                         <div className="messages p-10">
-                          <div>No messages to display</div>
+                            <div>No messages to display</div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     );

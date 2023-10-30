@@ -1,8 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
+
 import Toolbar from "../../components/finalworkcomps/Toolbar";
 import SinglePerson from "../../components/finalworkcomps/messages/SinglePerson";
 import ErrorPage from "./ErrorPage";
+import Spinner from "../../components/finalworkcomps/Spinner";
+import SmallSpinner from "../../components/finalworkcomps/SmallSpinner";
+
 import {useSelector, useDispatch} from "react-redux";
 import {setMessages} from "../../features/user";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,6 +15,7 @@ import {faPaperPlane} from "@fortawesome/free-regular-svg-icons";
 const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
 
     const [errorMsg, setErrorMsg] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
     const messageRef = useRef()
     const messages = useSelector(state => state.user.messages)
@@ -19,7 +24,6 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
 
     const location = useLocation();
     const selectedUsername = location.pathname.split('/').pop();
-
 
     useEffect(() => {
 
@@ -43,11 +47,11 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
                         const filteredUsers = data.data.filter((u) => u._id !== user.id && hasMessageHistory(u.username));
                         setUsers(filteredUsers);
                     }
-
+                    setIsLoading(false);
                 }
             });
 
-    }, [user, messages]);
+    }, [location.pathname]);
 
     const hasMessageHistory = (username) => {
         return messages.some((message) =>
@@ -68,6 +72,7 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
             .then(res => res.json())
             .then(data => {
                 dispatch(setMessages(data.data));
+                setIsLoading(false);
             });
     }, [messages])
 
@@ -81,6 +86,7 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
     function selectUser(user) {
         setSelectedUser(user);
         navigate(`/messages/with/${user.username}`)
+        setErrorMsg("")
     }
 
     async function sendMessage(){
@@ -96,6 +102,7 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
             text: messageText,
             to: selectedUser.username,
             from: user.username,
+            timestamp: Date.now(),
             id: user.id
         };
 
@@ -127,43 +134,53 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
 
     return (
         <div>
-            <Toolbar/>
+            <Toolbar />
             <div className="messaging d-flex">
 
                 <div>
-                    <h2 style={{color: "white", textAlign: "center"}}>Contacts</h2>
+                    <h2 style={{ color: "white", textAlign: "center" }}>Contacts</h2>
                     <div className="available-users flex-1">
-                        {users.map((user) => (<SinglePerson key={user._id} user={user} onSelectUser={() => selectUser(user)}/>))}
+                        {users.map((user) => (<SinglePerson key={user._id} user={user} onSelectUser={() => selectUser(user)} />))}
                     </div>
                 </div>
 
                 <div className="message-field flex-4">
                     <h2>Your conversation history with: {selectedUser ? selectedUser.username : 'No user selected'}</h2>
                     <div className="d-flex justify-center">
-                        <div className="messages p-10">
-
-                            {selectedUser && messages ? messages.filter((message) =>
+                        {isLoading ? (<SmallSpinner />
+                        ) : (
+                            <div className="messages p-10">
+                                {selectedUser && messages ? messages.filter((message) =>
                                         (message.to === selectedUser.username && message.from === user.username) || (message.from === selectedUser.username && message.to === user.username)
                                     ).map((message, index) => (
                                         <div className={`single-message ${message.from === user.username ? "user-message" : "selected-user-message"}`} key={index}>
                                             <p>{message.text}</p>
+                                            <p className="message-timestamp">
+                                                {new Date(message.timestamp).toLocaleString('lt-LT', {
+                                                    year: 'numeric',
+                                                    month: '2-digit',
+                                                    day: '2-digit',
+                                                    hour: '2-digit',
+                                                    minute: '2-digit'
+                                                })}
+                                            </p>
                                         </div>
                                     ))
-                                : <div>No messages to display</div>
-                            }
-                            <p style={{color: "red"}}><b>{errorMsg}</b></p>
-                        </div>
+                                    : <div>No messages to display</div>
+                                }
+                                <p style={{ color: "red" }}><b>{errorMsg}</b></p>
+                            </div>
+                        )}
                     </div>
 
-                    {selectedUser? (
+                    {selectedUser ? (
                         <div className="message-inputs d-flex justify-center">
-                            <input type="text" placeholder="enter your message" ref={messageRef}/>
+                            <textarea placeholder="enter your message" ref={messageRef} />
                             <button onClick={sendMessage}>Send <FontAwesomeIcon icon={faPaperPlane} /></button>
                         </div>
                     ) : (
                         <div></div>
                     )
-
                     }
                 </div>
             </div>
