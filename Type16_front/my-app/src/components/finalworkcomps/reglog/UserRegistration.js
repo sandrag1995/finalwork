@@ -14,6 +14,8 @@ const UserRegistration = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [msg, setMsg] = useState('');
 
+    const [inputTyped, setInputTyped] = useState(false);
+
     async function registerUser() {
         const username = usernameRef.current.value;
         const pass1 = pass1Ref.current.value;
@@ -142,7 +144,7 @@ const UserRegistration = () => {
             ) : (
                 <p style={{ color: 'green' }}>{msg}</p>
             )}
-            <button onClick={registerUser}>Register</button>
+            {(usernameValue || passValue || pass2Value) && <button onClick={registerUser}>Register</button>}
         </div>
     );
 };

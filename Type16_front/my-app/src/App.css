@@ -26,6 +26,10 @@
   margin: 10px;
 }
 
+.mt-50{
+  margin-top: 50px;
+}
+
 .flex-wrap{
   flex-wrap: wrap;
 }
@@ -66,7 +70,7 @@
 
 body{
   background-color: #131313;
-  font-family: Arial, serif;
+  font-family: Roboto, sans-serif;
 }
 
 
@@ -192,6 +196,10 @@ background-color: #0e69c4;
 
 /*/////////////TOOLBAR///////////////*/
 
+body{
+  font-family: Roboto, sans-serif;
+}
+
 .toolbar{
 background-color: #5e675d;
   border-radius: 10px;
@@ -205,18 +213,17 @@ background-color: #5e675d;
 
 .toolbar button{
   font-size: 18px;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  transition-duration: 0.4s;
 }
 
 .toolbar button:hover{
   cursor: pointer;
-}
-
-.active-button {
-  background-color: #a0f9a3;
-  border-color: #a0f9a3;
-  padding: 5px;
-  border-radius: 5px;
-  color: #131313;
+  background-color: rgba(174, 173, 179, 0.59);
 }
 
 .toolbar img{
@@ -464,14 +471,16 @@ background-color: #a0f9a3;
 }
 
 .single-user-card button{
-  background-color: #a0f9a3;
-  border-color: #a0f9a3;
+  background-color: transparent;
+  border-color: transparent;
   border-radius: 5px;
-  color: #131313;
+  color: #76da76;
+  transition-duration: 0.4s;
 }
 
 .single-user-card button:hover{
   cursor: pointer;
+  background-color: rgba(174, 173, 179, 0.59);
 }
 
 /*//////////////////////MODAL SECTION///////////////////////*/
@@ -581,14 +590,22 @@ cursor: pointer;
 }
 
 .user-card button{
-  background-color: #a0f9a3;
-  border-color: #a0f9a3;
-  color: #131313;
+  background-color: transparent;
+  border-color: transparent;
+  color: #a0f9a3;
+  transition-duration: 0.4s;
 }
 
-.comment-section{
-  border-radius: 5px;
-  background-color: #131313;
+.user-card button:hover{
+  background-color: rgba(174, 173, 179, 0.59);
+}
+
+.section-2{
+  height: 87vh;
+}
+
+.comments{
+  height: 80%;
 }
 
 .comment{
@@ -842,6 +859,14 @@ cursor: pointer;
 
 }
 
+@media (max-width: 875px){
+
+  .modal h2{
+    font-size: 18px;
+  }
+
+}
+
 @media (max-width: 720px){
   .profile-settings{
     display: flex;
@@ -910,114 +935,13 @@ cursor: pointer;
     height: 50px;
   }
 
-  .modal textarea{
-    width: 350px;
-    margin-left: 60px;
-  }
 
   .modal button{
     font-size: 12px;
   }
 
-.comments,
-.section-2 p{
-  margin-left: 60px;
-}
-
-  .comment{
-    width: 345px;
+  .section-2{
+    width: 100%;
   }
 
-}
-
-
-/*//////////////Portfolio page///////////////*/
-
-.profile-info{
-  margin-top: 20px;
-  margin-left: 20px;
-  color: #e5e5e5;
-}
-
-.profile-info span{
-  font-weight: 600;
-}
-
-.profile-info img{
-  height: 300px;
-}
-
-.projects{
-  margin-top: 20px;
-  margin-left: 20px;
-  color: #e5e5e5;
-  margin-right: 20px;
-}
-
-.projects label{
-  font-size: 20px;
-}
-
-.contact-form{
-  background-color: #154128;
-  padding: 20px 30px;
-  border-radius: 20px;
-}
-
-.contact-form input,
-.contact-form textarea{
-  margin-top: 10px;
-  padding: 5px;
-  width: 400px;
-  background-color: #07160f;
-  color: #969d98;
-  border-color: #0f3123;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.contact-form button{
-  margin-left: 10px;
-  background-color: #f3db61;
-  border-color: #f3db61;
-  border-radius: 8px;
-  color: #514520;
-  font-size: 16px;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.all-projects{
-  margin-top: 20px;
-  background-color: #154128;
-  padding: 20px 30px;
-  height: 65vh;
-  overflow: scroll;
-  border-radius: 20px;
-}
-
-.all-projects a{
-  color: #969d98;
-}
-
-.all-projects a:hover{
-  color: #d2d9d8;
-}
-
-.single-project{
-  max-width: 600px;
-  margin: 10px;
-  padding: 10px;
-  background-color: #0f3123;
-  color: #969d98;
-  border-radius: 10px;
-}
-
-.icons{
-  margin: 5px;
-}
-
-.icon{
-  margin: 5px;
-  height: 50px;
 }

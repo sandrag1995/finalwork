@@ -4,7 +4,6 @@ import {useNavigate, useLocation} from "react-router-dom";
 import Toolbar from "../../components/finalworkcomps/Toolbar";
 import SinglePerson from "../../components/finalworkcomps/messages/SinglePerson";
 import ErrorPage from "./ErrorPage";
-import Spinner from "../../components/finalworkcomps/Spinner";
 import SmallSpinner from "../../components/finalworkcomps/SmallSpinner";
 
 import {useSelector, useDispatch} from "react-redux";
@@ -14,8 +13,8 @@ import {faPaperPlane} from "@fortawesome/free-regular-svg-icons";
 
 const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
 
-    const [errorMsg, setErrorMsg] = useState("")
     const [isLoading, setIsLoading] = useState(true)
+    const [messageValue, setMessageValue]  = useState("")
 
     const messageRef = useRef()
     const messages = useSelector(state => state.user.messages)
@@ -86,7 +85,6 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
     function selectUser(user) {
         setSelectedUser(user);
         navigate(`/messages/with/${user.username}`)
-        setErrorMsg("")
     }
 
     async function sendMessage(){
@@ -94,7 +92,6 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
         const messageText = messageRef.current.value;
 
         if (!messageText) {
-            setErrorMsg('Message must contain at least a single symbol!');
             return;
         }
 
@@ -122,7 +119,11 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
                 dispatch(setMessages(data.data.message));
             }
                 messageRef.current.value = '';
-            setErrorMsg("")
+    }
+
+    const handleMessageText = (e) => {
+        const { value } = e.target;
+        setMessageValue(value);
     }
 
 
@@ -168,15 +169,14 @@ const Messages = ({user, users, setUsers, selectedUser, setSelectedUser}) => {
                                     ))
                                     : <div>No messages to display</div>
                                 }
-                                <p style={{ color: "red" }}><b>{errorMsg}</b></p>
                             </div>
                         )}
                     </div>
 
                     {selectedUser ? (
                         <div className="message-inputs d-flex justify-center">
-                            <textarea placeholder="enter your message" ref={messageRef} />
-                            <button onClick={sendMessage}>Send <FontAwesomeIcon icon={faPaperPlane} /></button>
+                            <textarea placeholder="enter your message" ref={messageRef} onChange={handleMessageText}/>
+                            {messageValue && <button onClick={sendMessage}>Send <FontAwesomeIcon icon={faPaperPlane} /></button>}
                         </div>
                     ) : (
                         <div></div>

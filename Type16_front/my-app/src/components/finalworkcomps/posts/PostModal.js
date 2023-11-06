@@ -138,6 +138,7 @@ const PostModal = ({ post, closeModal, user}) => {
                             <div className="comment-inputs d-flex flex-column">
                                 <textarea placeholder="Leave a comment" onChange={handleCommentChange}/>
                                 {commentValue && <button onClick={comment} className="comment-btn">Comment</button>}
+                            </div>
                                 {comments.length > 0 ? (
                                     <div className="comments">
                                         {comments.map((comment, i) => (
@@ -149,7 +150,6 @@ const PostModal = ({ post, closeModal, user}) => {
                                 ) : (
                                     <div className="comments">No comments yet...</div>
                                 )}
-                            </div>
                     </div>
 
                 </div>

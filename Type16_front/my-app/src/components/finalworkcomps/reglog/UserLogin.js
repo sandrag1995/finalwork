@@ -18,13 +18,6 @@ const UserLogin = () => {
     const user = useSelector(state => state.user.user)
     const dispatch = useDispatch()
 
-
-    // function autoLogin() {
-    //     const auto = checkRef.current.checked
-    //
-    //     localStorage.setItem("autologin", auto)
-    // }
-
     function autoLogin() {
         const auto = checkRef.current.checked;
         localStorage.setItem("autologin", auto);
@@ -63,7 +56,6 @@ const UserLogin = () => {
         } else {
             setErrorMsg(data.message)
         }
-
     }
 
     const handleUsernameChange = (e) => {
@@ -90,7 +82,7 @@ const UserLogin = () => {
             </label><br/>
             <input type="checkbox" ref={checkRef} id="auto" onChange={autoLogin}/> <label>Remember me?</label>
             <p style={{color: "red"}}>{errorMsg}</p>
-            <button onClick={loginUser}>Login</button>
+            {(usernameValue || passValue) && <button onClick={loginUser}>Login</button>}
         </div>
     );
 };
